@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Block has given styles should match snapshot 1`] = `
+<div
+  className=""
+/>
+`;
+
+exports[`Block has given styles should render with specific CSS properties 1`] = `
+.c0 {
+  align-items: center;
+  background-color: red;
+  color: white;
+}
+
+<div
+  className="c0"
+  data-testid="block"
+/>
+`;

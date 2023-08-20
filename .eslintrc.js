@@ -4,33 +4,26 @@ module.exports = {
     browser: true,
     node: true,
   },
-  parser: ["@typescript-eslint/parser"],
-  parseOptions: {
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
     ecmaVersion: 2020,
-    sourceTyoe: "module",
+    sourceTyoe: 'module',
     ecmaFeatures: {
       jsx: true,
     },
   },
-  plugins: [
-    "react",
-    "prettier",
-    "react-hooks",
-    "simple-import-sort",
-    "sonarjs",
-  ],
+  plugins: ['react', 'prettier', 'react-hooks', 'simple-import-sort', 'sonarjs'],
   extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:simple-import-sort/recommended",
-    "plugin:sonarjs/recommended",
-    "prettier",
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:sonarjs/recommended',
+    'prettier',
   ],
   settings: {
     react: {
-      version: "detect",
+      version: 'detect',
     },
   },
-};
+}

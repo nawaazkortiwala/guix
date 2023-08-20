@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "incremental": true,
+    "declaration": true,
+    "incremental": false,
     "lib": ["dom", "dom.iterable", "esnext"],
-    "target": "es5",
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "target": "es6",
     "jsx": "react",
-    "module": "commonjs",
+    "module": "esnext",
     "rootDir": "./src",
     "moduleResolution": "node",
     "baseUrl": "./",
@@ -13,7 +15,6 @@
     },
     "outDir": "./dist",
     "isolatedModules": true,
-    "verbatimModuleSyntax": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
