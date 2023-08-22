@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Running post-commit hook"
+
+echo "Building..."
+./build.sh
+
+echo "Publishing..."
+./publish.sh
+
+echo "Done."
