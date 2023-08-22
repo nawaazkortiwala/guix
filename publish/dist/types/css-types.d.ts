@@ -9,13 +9,22 @@
  * Licensed under the Apache 2.0 License. See LICENSE.txt for more information.
  */
 import { StandardProperties } from 'csstype'
-export type Theme = object
-export type Context = object
+import { Context, ThemeContent } from './state-types'
 export type CSSValue<T extends keyof StandardProperties> = StandardProperties[T]
 export type CSSValueFn<T extends keyof StandardProperties> = (
-  theme: Theme,
+  theme: ThemeContent,
   context: Context
 ) => CSSValue<T>
+export type CSSStyleFn = (theme: ThemeContent, context: Context) => CSSProperties
+export type CSSStyle = {
+  [`$style`]: CSSStyleFn
+}
 export type CSSProperties = {
   [key in keyof StandardProperties as `$${string & key}`]: CSSValue<key> | CSSValueFn<key>
+} & Partial<CSSStyle>
+export type CSSPropertiesWithTheme = CSSProperties & {
+  theme: {
+    theme: ThemeContent
+    context: Context
+  }
 }

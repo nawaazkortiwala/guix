@@ -10,9 +10,6 @@
     "rootDir": "./src",
     "moduleResolution": "node",
     "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"]
-    },
     "outDir": "./dist",
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,

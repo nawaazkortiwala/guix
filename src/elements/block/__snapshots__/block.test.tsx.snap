@@ -9,8 +9,9 @@ exports[`Block has given styles should match snapshot 1`] = `
 exports[`Block has given styles should render with specific CSS properties 1`] = `
 .c0 {
   align-items: center;
-  background-color: red;
+  background-color: #007bff;
   color: white;
+  border-color: red;
 }
 
 <div

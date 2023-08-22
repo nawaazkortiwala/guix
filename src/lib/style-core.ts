@@ -1,12 +1,27 @@
-import { CSSProperties } from '../types/css-types'
+import { CSSPropertiesWithTheme, CSSStyleFn } from '../types/css-types'
 import { css } from 'styled-components'
 
-export function convertCssTypePropsToCss(cssTypeProps: CSSProperties): string {
+export function convertCssTypePropsToCss(cssTypeProps: CSSPropertiesWithTheme): string {
   const cssRules = Object.entries(cssTypeProps)
-    .filter(([key]) => key.match(/\$/))
+    .filter(([key, value]) => key.match(/\$/) && value !== undefined && value !== null)
     .map(([key, value]) => {
       const cssProp = key.replace(/\$/, '').replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`)
-      return `${cssProp}: ${value};`
+      const isStyleProp = cssProp === 'style'
+
+      console.log(cssTypeProps.theme)
+
+      if (isStyleProp)
+        return convertCssTypePropsToCss({
+          ...(value as CSSStyleFn)(cssTypeProps.theme.activeTheme, cssTypeProps.theme),
+          theme: cssTypeProps.theme,
+        })
+
+      const _value =
+        typeof value === 'function'
+          ? value(cssTypeProps.theme.activeTheme, cssTypeProps.theme)
+          : value
+
+      return `${cssProp}: ${_value};`
     })
 
   return cssRules.join('\n')
@@ -14,7 +29,6 @@ export function convertCssTypePropsToCss(cssTypeProps: CSSProperties): string {
 
 export const utilStyleSheet = css`
   ${(props) => {
-    // console.log(convertCssTypePropsToCss(props as CSSProperties))
-    return convertCssTypePropsToCss(props as CSSProperties)
+    return convertCssTypePropsToCss(props as CSSPropertiesWithTheme)
   }}
 `

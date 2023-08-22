@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn format
-yarn lint --fix --quiet
-yarn transpile
-yarn test
+pnpm format
+pnpm lint --fix --quiet
+pnpm test
+pnpm transpile

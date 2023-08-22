@@ -1,6 +1,6 @@
 {
   "name": "guix",
-  "version": "0.0.12",
+  "version": "0.0.21",
   "description": "A Cool, Prop-based UI Library for ReactJS",
   "main": "dist/index.js",
   "engines": {

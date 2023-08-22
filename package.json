@@ -11,7 +11,7 @@
     "build-format": "prettier --write src/**/*.{ts,tsx}",
     "build-lint": "eslint --fix src/**/*.{ts,tsx}",
     "build-test": "jest",
-    "build-build": "tsc",
+    "build-build": "rollup -c",
     "build": "bash build.sh",
     "test": "jest",
     "transpile": "tsc --noEmit",
