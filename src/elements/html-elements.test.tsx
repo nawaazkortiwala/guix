@@ -4,14 +4,15 @@ import 'jest-styled-components'
 import React from 'react'
 import renderer from 'react-test-renderer'
 
+import defaultTheme from '../context/default-theme'
 import ThemeProvider from '../context/provider'
 import { CSSProperties } from '../types/css-types'
-import extendTheme from '../utils/extend-theme'
+// import extendTheme from '../utils/extend-theme'
 import { Div } from './html-elements'
 
 describe('Block has given styles', () => {
   it('should render with specific CSS properties', () => {
-    const props: CSSProperties = {
+    const props: CSSProperties<{ colors: { primary: string } }> = {
       $alignItems: 'center',
       $backgroundColor: ({ theme }) => theme.colors.primary,
       $color: 'white',
@@ -28,13 +29,19 @@ describe('Block has given styles', () => {
       .create(
         <ThemeProvider
           theme={{
-            light: extendTheme((theme) => theme),
-            dark: extendTheme((theme) => theme),
+            light: defaultTheme,
+            dark: defaultTheme,
           }}
           activeTheme="light"
           themeModes={['light', 'dark']}
         >
-          <Div data-testid="block" {...props} />
+          <Div
+            data-testid="block"
+            {...props}
+            $backgroundColor={({ theme }) => {
+              return theme.colors.primary
+            }}
+          />
         </ThemeProvider>
       )
       .toJSON()

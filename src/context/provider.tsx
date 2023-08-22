@@ -3,11 +3,11 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 
 import { Context } from '../types/state-types'
 
-type ThemeProviderProps = Context
+type ThemeProviderProps = Context<unknown>
 
 const StyledThemeProviderWithContext = StyledThemeProvider as FC<
   PropsWithChildren<{
-    theme: Context
+    theme: Context<unknown>
   }>
 >
 

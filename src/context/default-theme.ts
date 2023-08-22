@@ -1,6 +1,4 @@
-import { ThemeContent } from '../types/state-types'
-
-const defaultTheme: ThemeContent = {
+const defaultTheme = {
   baseSize: 16,
   colors: {
     primary: '#007bff',

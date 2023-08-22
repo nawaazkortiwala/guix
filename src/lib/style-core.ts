@@ -1,7 +1,6 @@
 import { StandardProperties } from 'csstype'
 import { css, RuleSet } from 'styled-components'
 
-import { ThemeContent } from '../types'
 import {
   CSSAddOns,
   CSSAddOnsKeys,
@@ -14,14 +13,14 @@ import {
 } from '../types/css-types'
 
 export const getValue = <T extends keyof StandardProperties>(
-  value: CSSValue<T> | CSSValueFn<T>,
+  value: CSSValue<T> | CSSValueFn<T, unknown>,
   args: CSSFnArgs
 ): CSSValue<T> => (typeof value === 'function' ? value(args) : value)
 
 export const getAddOnsValue = <T extends keyof CSSAddOns>(
   value: CSSAddOns[T] | CSSStyleFn,
   args: CSSFnArgs
-): CSSProperties => (typeof value === 'function' ? value(args) : value)
+): CSSProperties<unknown> => (typeof value === 'function' ? value(args) : value)
 
 export const hoverStyles = (cssTypeProps: CSSPropertiesWithTheme) =>
   css`
@@ -36,7 +35,7 @@ export function convertCssTypePropsToCss(cssTypeProps: CSSPropertiesWithTheme): 
     .map(([key, value]) => {
       const cssProp = key.replace(/\$/, '').replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`)
       const args: CSSFnArgs = {
-        theme: cssTypeProps.theme.theme[cssTypeProps.theme.activeTheme] as ThemeContent,
+        theme: cssTypeProps.theme.theme[cssTypeProps.theme.activeTheme],
         context: cssTypeProps.theme,
       }
 

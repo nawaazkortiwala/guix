@@ -11,31 +11,34 @@
 
 import { StandardProperties } from 'csstype'
 
-import { Context, ThemeContent } from './state-types'
+import { Context } from './state-types'
 
 export type CSSValue<T extends keyof StandardProperties> = StandardProperties[T]
 
-export type CSSFnArgs = {
-  theme: ThemeContent
-  context: Context
+export type CSSFnArgs<T = unknown> = {
+  theme: T
+  context: Context<T>
 }
-export type CSSValueFn<T extends keyof StandardProperties> = (args: CSSFnArgs) => CSSValue<T>
+export type CSSValueFn<S extends keyof StandardProperties, T = unknown> = (
+  args: CSSFnArgs<T>
+) => CSSValue<S>
 
-export type CSSStyleFn = (args: CSSFnArgs) => CSSProperties
+export type CSSStyleFn<T = unknown> = (args: CSSFnArgs<T>) => CSSProperties<T>
 
 export enum CSSAddOnsKeys {
   style = `$style`,
   hover = `$hover`,
 }
 
-export type CSSAddOns = {
-  [key in CSSAddOnsKeys]: CSSProperties | CSSStyleFn
+export type CSSAddOns<T = unknown> = {
+  [key in CSSAddOnsKeys]: CSSProperties<T> | CSSStyleFn<T>
 }
 
-export type CSSProperties = {
-  [key in keyof StandardProperties as `$${string & key}`]: CSSValue<key> | CSSValueFn<key>
-} & Partial<CSSAddOns>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CSSProperties<T = any> = {
+  [key in keyof StandardProperties as `$${string & key}`]: CSSValue<key> | CSSValueFn<key, T>
+} & Partial<CSSAddOns<T>>
 
-export type CSSPropertiesWithTheme = CSSProperties & {
-  theme: Context
+export type CSSPropertiesWithTheme<T = unknown> = CSSProperties<T> & {
+  theme: Context<T>
 }
