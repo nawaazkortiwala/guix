@@ -1,6 +1,7 @@
+import { css } from 'styled-components'
+
 import { ThemeContent } from '../types'
 import { CSSFnArgs, CSSPropertiesWithTheme, CSSStyleFn } from '../types/css-types'
-import { css } from 'styled-components'
 
 export function convertCssTypePropsToCss(cssTypeProps: CSSPropertiesWithTheme): string {
   const cssRules = Object.entries(cssTypeProps)

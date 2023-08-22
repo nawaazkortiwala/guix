@@ -1,11 +1,13 @@
-import { CSSProperties } from '../../types/css-types'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+
 import React from 'react'
 import renderer from 'react-test-renderer'
-import Block from './block'
-import ThemeProvider from '../../context/provider'
-import extendTheme from '../../utils/extend-theme'
+
+import ThemeProvider from '../context/provider'
+import { CSSProperties } from '../types/css-types'
+import extendTheme from '../utils/extend-theme'
+import { Div } from './html-element'
 
 describe('Block has given styles', () => {
   it('should render with specific CSS properties', () => {
@@ -29,7 +31,7 @@ describe('Block has given styles', () => {
           activeTheme="light"
           themeModes={['light', 'dark']}
         >
-          <Block data-testid="block" {...props} />
+          <Div data-testid="block" {...props} />
         </ThemeProvider>
       )
       .toJSON()
@@ -42,7 +44,7 @@ describe('Block has given styles', () => {
   })
 
   it('should match snapshot', () => {
-    const tree = renderer.create(<Block />).toJSON()
+    const tree = renderer.create(<Div />).toJSON()
     expect(tree).toMatchSnapshot()
   })
 })
