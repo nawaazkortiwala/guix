@@ -1,4 +1,4 @@
-import { ThemeContent } from 'publish/dist'
+import { ThemeContent } from '../types'
 import { CSSFnArgs, CSSPropertiesWithTheme, CSSStyleFn } from '../types/css-types'
 import { css } from 'styled-components'
 
