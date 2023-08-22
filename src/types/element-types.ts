@@ -1,6 +1,7 @@
 import React, { HTMLAttributes } from 'react'
-import { CSSProperties } from './css-types'
 import { IStyledComponent } from 'styled-components'
+
+import { CSSProperties } from './css-types'
 
 type FastOmit<T extends object, U extends string | number | symbol> = {
   [K in keyof T as K extends U ? never : K]: T[K]

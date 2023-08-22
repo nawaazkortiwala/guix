@@ -10,6 +10,7 @@
  */
 
 import { StandardProperties } from 'csstype'
+
 import { Context, ThemeContent } from './state-types'
 
 export type CSSValue<T extends keyof StandardProperties> = StandardProperties[T]
@@ -19,14 +20,21 @@ export type CSSFnArgs = {
   context: Context
 }
 export type CSSValueFn<T extends keyof StandardProperties> = (args: CSSFnArgs) => CSSValue<T>
+
 export type CSSStyleFn = (args: CSSFnArgs) => CSSProperties
-export type CSSStyle = {
-  [`$style`]: CSSStyleFn
+
+export enum CSSAddOnsKeys {
+  style = `$style`,
+  hover = `$hover`,
+}
+
+export type CSSAddOns = {
+  [key in CSSAddOnsKeys]: CSSProperties | CSSStyleFn
 }
 
 export type CSSProperties = {
   [key in keyof StandardProperties as `$${string & key}`]: CSSValue<key> | CSSValueFn<key>
-} & Partial<CSSStyle>
+} & Partial<CSSAddOns>
 
 export type CSSPropertiesWithTheme = CSSProperties & {
   theme: Context

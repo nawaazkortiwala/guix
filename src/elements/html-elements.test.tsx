@@ -7,7 +7,7 @@ import renderer from 'react-test-renderer'
 import ThemeProvider from '../context/provider'
 import { CSSProperties } from '../types/css-types'
 import extendTheme from '../utils/extend-theme'
-import { Div } from './html-element'
+import { Div } from './html-elements'
 
 describe('Block has given styles', () => {
   it('should render with specific CSS properties', () => {
@@ -18,6 +18,9 @@ describe('Block has given styles', () => {
       $style: ({ context }) => {
         return {
           $borderColor: context.activeTheme === 'light' ? 'red' : 'green',
+          $hover: {
+            $backgroundColor: 'blue',
+          },
         }
       },
     }
@@ -39,6 +42,9 @@ describe('Block has given styles', () => {
     expect(tree).toMatchSnapshot()
     expect(tree).toHaveStyleRule('align-items', 'center')
     expect(tree).toHaveStyleRule('background-color', '#007bff')
+    expect(tree).toHaveStyleRule('background-color', 'blue', {
+      modifier: ':hover',
+    })
     expect(tree).toHaveStyleRule('color', 'white')
     expect(tree).toHaveStyleRule('border-color', 'red')
   })

@@ -1,6 +1,7 @@
-import { Context } from '../types/state-types'
 import React, { FC, PropsWithChildren } from 'react'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
+
+import { Context } from '../types/state-types'
 
 type ThemeProviderProps = Context
 
