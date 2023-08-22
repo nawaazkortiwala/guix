@@ -1,4 +1,5 @@
-import { CSSPropertiesWithTheme, CSSStyleFn } from '../types/css-types'
+import { ThemeContent } from 'publish/dist'
+import { CSSFnArgs, CSSPropertiesWithTheme, CSSStyleFn } from '../types/css-types'
 import { css } from 'styled-components'
 
 export function convertCssTypePropsToCss(cssTypeProps: CSSPropertiesWithTheme): string {
@@ -7,19 +8,18 @@ export function convertCssTypePropsToCss(cssTypeProps: CSSPropertiesWithTheme): 
     .map(([key, value]) => {
       const cssProp = key.replace(/\$/, '').replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`)
       const isStyleProp = cssProp === 'style'
-
-      console.log(cssTypeProps.theme)
+      const args: CSSFnArgs = {
+        theme: cssTypeProps.theme.theme[cssTypeProps.theme.activeTheme] as ThemeContent,
+        context: cssTypeProps.theme,
+      }
 
       if (isStyleProp)
         return convertCssTypePropsToCss({
-          ...(value as CSSStyleFn)(cssTypeProps.theme.activeTheme, cssTypeProps.theme),
+          ...(value as CSSStyleFn)(args),
           theme: cssTypeProps.theme,
         })
 
-      const _value =
-        typeof value === 'function'
-          ? value(cssTypeProps.theme.activeTheme, cssTypeProps.theme)
-          : value
+      const _value = typeof value === 'function' ? value(args) : value
 
       return `${cssProp}: ${_value};`
     })

@@ -7,10 +7,11 @@ describe('convertCssTypePropsToCss', () => {
     const cssTypeProps = {
       $alignItems: 'center',
       theme: {
-        theme: defaultTheme,
-        multiTheme: false,
-        activeTheme: defaultTheme,
-        themes: [],
+        theme: {
+          light: defaultTheme,
+        },
+        activeTheme: 'light',
+        themeModes: ['light'],
       },
     }
     const cssRules = convertCssTypePropsToCss(cssTypeProps)
@@ -23,10 +24,11 @@ describe('convertCssTypePropsToCss', () => {
       $alignItems: 'center',
       $backgroundColor: 'red',
       theme: {
-        theme: defaultTheme,
-        multiTheme: false,
-        activeTheme: defaultTheme,
-        themes: [],
+        theme: {
+          light: defaultTheme,
+        },
+        activeTheme: 'light',
+        themeModes: ['light'],
       },
     }
     const cssRules = convertCssTypePropsToCss(cssTypeProps)
@@ -37,10 +39,11 @@ describe('convertCssTypePropsToCss', () => {
     const cssTypeProps = {
       $borderBottomLeftRadius: '10px',
       theme: {
-        theme: defaultTheme,
-        multiTheme: false,
-        activeTheme: defaultTheme,
-        themes: [],
+        theme: {
+          light: defaultTheme,
+        },
+        activeTheme: 'light',
+        themeModes: ['light'],
       },
     }
     const cssRules = convertCssTypePropsToCss(cssTypeProps)
@@ -52,10 +55,11 @@ describe('convertCssTypePropsToCss', () => {
       $alignItems: 'center',
       backgroundColor: 'red',
       theme: {
-        theme: defaultTheme,
-        multiTheme: false,
-        activeTheme: defaultTheme,
-        themes: [],
+        theme: {
+          light: defaultTheme,
+        },
+        activeTheme: 'light',
+        themeModes: ['light'],
       },
     }
     const cssRules = convertCssTypePropsToCss(cssTypeProps)
@@ -65,10 +69,11 @@ describe('convertCssTypePropsToCss', () => {
   it('should handle empty input', () => {
     const cssTypeProps = {
       theme: {
-        theme: defaultTheme,
-        multiTheme: false,
-        activeTheme: defaultTheme,
-        themes: [],
+        theme: {
+          light: defaultTheme,
+        },
+        activeTheme: 'light',
+        themeModes: ['light'],
       },
     }
     const cssRules = convertCssTypePropsToCss(cssTypeProps)
@@ -77,15 +82,16 @@ describe('convertCssTypePropsToCss', () => {
 
   it('should handle $style prop', () => {
     const cssTypeProps: CSSPropertiesWithTheme = {
-      $style: (theme) => ({
+      $style: ({ theme }) => ({
         $alignItems: 'center',
         $backgroundColor: theme.colors.primary,
       }),
       theme: {
-        theme: defaultTheme,
-        multiTheme: false,
-        activeTheme: defaultTheme,
-        themes: [],
+        theme: {
+          light: defaultTheme,
+        },
+        activeTheme: 'light',
+        themeModes: ['light'],
       },
     }
     const cssRules = convertCssTypePropsToCss(cssTypeProps)
@@ -94,15 +100,16 @@ describe('convertCssTypePropsToCss', () => {
 
   it('should correspond to context', () => {
     const cssTypeProps: CSSPropertiesWithTheme = {
-      $style: (theme, context) => ({
+      $style: ({ theme, context }) => ({
         $alignItems: 'center',
-        $backgroundColor: context.multiTheme ? theme.colors.primary : 'red',
+        $backgroundColor: context.activeTheme === 'dark' ? theme.colors.primary : 'red',
       }),
       theme: {
-        theme: defaultTheme,
-        multiTheme: false,
-        activeTheme: defaultTheme,
-        themes: [],
+        theme: {
+          light: defaultTheme,
+        },
+        activeTheme: 'light',
+        themeModes: ['light'],
       },
     }
     const cssRules = convertCssTypePropsToCss(cssTypeProps)

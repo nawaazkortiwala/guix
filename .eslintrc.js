@@ -26,4 +26,7 @@ module.exports = {
       version: 'detect',
     },
   },
+  rules: {
+    'prettier/prettier': 'error',
+  },
 }

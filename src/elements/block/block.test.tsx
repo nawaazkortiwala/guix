@@ -11,11 +11,11 @@ describe('Block has given styles', () => {
   it('should render with specific CSS properties', () => {
     const props: CSSProperties = {
       $alignItems: 'center',
-      $backgroundColor: (theme) => theme.colors.primary,
+      $backgroundColor: ({ theme }) => theme.colors.primary,
       $color: 'white',
-      $style: (_, context) => {
+      $style: ({ context }) => {
         return {
-          $borderColor: context.multiTheme ? 'red' : 'green',
+          $borderColor: context.activeTheme === 'light' ? 'red' : 'green',
         }
       },
     }
@@ -26,10 +26,8 @@ describe('Block has given styles', () => {
             light: extendTheme((theme) => theme),
             dark: extendTheme((theme) => theme),
           }}
-          multiTheme={{
-            themes: ['light', 'dark'],
-            activeTheme: 'light',
-          }}
+          activeTheme="light"
+          themeModes={['light', 'dark']}
         >
           <Block data-testid="block" {...props} />
         </ThemeProvider>

@@ -118,8 +118,7 @@ export type Theme = Record<ThemeMode, ThemeContent>
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Context = {
-  activeTheme: ThemeContent
-  theme: ThemeContent | Theme
-  multiTheme: boolean
-  themes: ThemeMode[]
+  theme: Theme
+  activeTheme: ThemeMode
+  themeModes: ThemeMode[]
 }
